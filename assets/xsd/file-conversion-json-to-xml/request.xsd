@@ -1,0 +1,16 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Json-To-Xml">
+        <xs:complexType>
+			<xs:sequence>
+				<xs:element name="File" type="complexType.file" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="complexType.file">
+        <xs:sequence>
+            <xs:element name="Url" minOccurs="1" maxOccurs="1" type="xs:anyURI"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

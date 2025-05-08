@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xml       = "http://www.w3.org/XML/1998/namespace"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault   = "qualified"
+    attributeFormDefault = "unqualified">
+	
+	<xs:element name="Soap">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Soap-Call" type="complexType.Generic.soapCall" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="complexType.Generic.soapCall">
+        <xs:sequence>
+            <xs:element name="Request" type="complexType.Generic.Request" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="complexType.Generic.Request">
+        <xs:sequence>
+            <xs:element name="Soap-Message" type="complexType.Generic.soapMessage" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="complexType.Generic.soapMessage">
+        <xs:sequence>
+            <xs:any processContents="skip"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Metadata">
+        <xs:sequence>
+            <xs:any processContents="skip"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	
+	
+</xs:schema>

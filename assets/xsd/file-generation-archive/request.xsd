@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<!-- Rétrocompatibilité ZIPS/ZIP -->
+	<xs:element name="Zips">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="Zip" type="zip" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="Archive" type="archive" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+	
+	<!-- Archives -->
+    <xs:element name="Archives">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="Zip" type="zip" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="Archive" type="archive" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+	<!-- Zip definition -->
+	<xs:complexType name="zip">
+		<xs:all>
+			<xs:element name="File-Name" type="file_name" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Compression-Method" type="file_name" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Compression-Level" type="file_name" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Password" type="file_name" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Files" type="files">
+				<xs:unique name="unique_path_zip">
+					<xs:selector xpath="File" />
+					<xs:field xpath="Path" />
+				</xs:unique>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+
+	<!-- Archive definition -->
+	<xs:complexType name="archive">
+		<xs:all>
+			<xs:element name="File-Name" type="file_name" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Compression-Method" type="compression_method" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Compression-Level" type="compression_level" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Password" type="password" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Files" type="files">
+				<xs:unique name="unique_path_archive">
+					<xs:selector xpath="File" />
+					<xs:field xpath="Path" />
+				</xs:unique>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<!-- FILES definition -->
+	<xs:complexType name="files">
+		<xs:sequence>
+			<xs:element name="File" type="file" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- FILE definition -->
+	<xs:complexType name="file">
+		<xs:all>
+			<xs:element name="Path" type="path_format" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Url" type="url_format" minOccurs="1" maxOccurs="1" />
+		</xs:all>
+	</xs:complexType>	
+	
+	<!-- file_name type -->
+	<xs:simpleType name="file_name">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- path_format type -->
+	<xs:simpleType name="path_format">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- url_format type -->
+	<xs:simpleType name="url_format">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- compression_method type -->
+	<xs:simpleType name="compression_method">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zip" />
+            <xs:enumeration value="7z" />
+            <xs:enumeration value="tar" />
+            <xs:enumeration value="gzip" />
+        </xs:restriction>
+    </xs:simpleType>
+
+	<!-- compression_level type -->
+	<xs:simpleType name="compression_level">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NONE" />
+            <xs:enumeration value="FASTEST" />
+            <xs:enumeration value="FAST" />
+            <xs:enumeration value="NORMAL" />
+            <xs:enumeration value="MAX" />
+            <xs:enumeration value="ULTRA" />
+        </xs:restriction>
+    </xs:simpleType>
+
+	<!-- password type -->
+	<xs:simpleType name="password">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,30 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Azure-Storage-Blob-Put">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="File" type="complexType.File" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="complexType.File">
+        <xs:sequence>
+            <xs:element name="Url" minOccurs="1" maxOccurs="1" type="xs:anyURI"></xs:element>
+            <xs:element name="Name" minOccurs="1" maxOccurs="1" type="simpleType.File.Name"></xs:element>
+            <xs:element name="Metadata" minOccurs="0" maxOccurs="1" type="complexType.File.Metadata"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.File.Metadata">
+        <xs:sequence>
+            <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"></xs:any>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="simpleType.File.Name">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9\-_]+(/{1}([A-Za-z0-9\-_])+)*\.{1}[a-z0-9]+"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

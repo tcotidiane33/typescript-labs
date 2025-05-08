@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="Rules-Engine">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Source-Tables" type="complexType.Source-Tables" minOccurs="1" maxOccurs="1"></xs:element>
+                <xs:element name="Rules" type="complexType.Rules" minOccurs="1" maxOccurs="1"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="table" type="xs:string" use="required"/>
+            <xs:attribute name="account" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="complexType.Source-Tables">
+        <xs:sequence>
+            <xs:element name="Table" type="complexType.Source-Tables.Table" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Source-Tables.Table">
+        <xs:attribute name="key" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-account" type="xs:string" use="optional"/>
+        <xs:attribute name="source-identifier" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="target-identifier" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Identifier" type="complexType.Rules.Identifier" minOccurs="0" maxOccurs="5"></xs:element>
+            <xs:element name="Classification" type="complexType.Rules.Classification" minOccurs="0" maxOccurs="5"></xs:element>
+            <xs:element name="Field" type="complexType.Rules.Field" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Identifier">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Rules.Rule" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-table" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-account" type="xs:string" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Classification">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Rules.Rule" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-table" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-account" type="xs:string" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Field">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Rules.Rule" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="source-account" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="source-table" type="xs:string" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule">
+        <xs:sequence>
+            <xs:element name="Conditions" type="complexType.Rules.Rule.Conditions" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="Action" type="complexType.Rules.Rule.Action" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="priority" type="xs:positiveInteger" use="required"></xs:attribute>
+        <xs:attribute name="name" type="xs:string" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <!-- CONDITIONS -->
+
+    <xs:complexType name="complexType.Rules.Rule.Conditions">
+        <xs:sequence>
+            <xs:element name="Condition-Group" type="complexType.Rules.Rule.Conditions.Condition-Group" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule.Conditions.Condition-Group">
+        <xs:sequence>
+            <xs:element name="Condition" minOccurs="1" maxOccurs="unbounded" type="complexType.Rules.Rule.Conditions.Condition-Group.Condition"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule.Conditions.Condition-Group.Condition">
+        <xs:sequence>
+            <xs:element name="Value" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="target" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="source" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="operator" type="simpleType.Condition.Operator" use="required"></xs:attribute>
+    </xs:complexType>
+
+    <xs:simpleType name="simpleType.Condition.Operator">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EMPTY"></xs:enumeration>
+            <xs:enumeration value="NOT_EMPTY"></xs:enumeration>
+            <xs:enumeration value="CONTAINS"></xs:enumeration>
+            <xs:enumeration value="EQUALS"></xs:enumeration>
+            <xs:enumeration value="NOT_EQUALS"></xs:enumeration>
+            <xs:enumeration value="STARTS_WITH"></xs:enumeration>
+            <xs:enumeration value="ENDS_WITH"></xs:enumeration>
+            <xs:enumeration value="LESS_THAN"></xs:enumeration>
+            <xs:enumeration value="LESS_THAN_OR_EQUAL"></xs:enumeration>
+            <xs:enumeration value="GREATER_THAN"></xs:enumeration>
+            <xs:enumeration value="GREATER_THAN_OR_EQUAL"></xs:enumeration>
+            <xs:enumeration value="IN"></xs:enumeration>
+            <xs:enumeration value="NOT_IN"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ACTION -->
+
+    <xs:complexType name="complexType.Rules.Rule.Action">
+        <xs:sequence>
+            <xs:element name="Copy" type="complexType.Rules.Rule.Action.Copy" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="Value" type="complexType.Rules.Rule.Action.Value" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="Template" type="complexType.Rules.Rule.Action.Template" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="Map" type="complexType.Rules.Rule.Action.Map" minOccurs="0" maxOccurs="1"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="type" type="simpleType.Rule.Action.type" use="required"></xs:attribute>
+        <xs:attribute name="from" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="use" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="lang" type="simpleType.lang" use="optional"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule.Action.Copy">
+        <xs:attribute name="use" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="source" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="target" type="xs:string" use="optional"></xs:attribute>
+        <xs:attribute name="lang" use="optional" type="xs:string"></xs:attribute>
+        <xs:attribute name="remove-carriage-returns" use="optional" type="xs:boolean"></xs:attribute>
+        <xs:attribute name="trim-spaces" use="optional" type="xs:boolean"></xs:attribute>
+        <xs:attribute name="remove-html" use="optional" type="xs:boolean"></xs:attribute>
+        <xs:attribute name="precision" use="optional" type="simpleType.Rule.Action.Template.Precision"></xs:attribute>
+        <xs:attribute name="round" use="optional" type="simpleType.Rule.Action.Template.Round"></xs:attribute>
+        <xs:attribute name="width-px" use="optional" type="xs:positiveInteger"></xs:attribute>
+        <xs:attribute name="height-px" use="optional" type="xs:positiveInteger"></xs:attribute>
+        <xs:attribute name="quality" use="optional" type="simpleType.Rule.Action.Template.Quality"></xs:attribute>
+        <xs:attribute name="extension" use="optional" type="simpleType.Rule.Action.Template.Extension"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule.Action.Value">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="quantity" use="optional" type="xs:integer"></xs:attribute>
+                <xs:attribute name="comment" use="optional" type="xs:string"></xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Rules.Rule.Action.Template">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="remove-carriage-returns" use="optional" type="xs:boolean"></xs:attribute>
+                <xs:attribute name="trim-spaces" use="optional" type="xs:boolean"></xs:attribute>
+                <xs:attribute name="remove-html" use="optional" type="xs:boolean"></xs:attribute>
+                <xs:attribute name="precision" use="optional" type="simpleType.Rule.Action.Template.Precision"></xs:attribute>
+                <xs:attribute name="round" use="optional" type="simpleType.Rule.Action.Template.Round"></xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Precision">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"></xs:minInclusive>
+            <xs:maxInclusive value="10"></xs:maxInclusive>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Round">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="UP"></xs:enumeration>
+            <xs:enumeration value="DOWN"></xs:enumeration>
+            <xs:enumeration value="CEILING"></xs:enumeration>
+            <xs:enumeration value="FLOOR"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Quality">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"></xs:minInclusive>
+            <xs:maxInclusive value="100"></xs:maxInclusive>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Extension">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="jpg"></xs:enumeration>
+            <xs:enumeration value="png"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="complexType.Rules.Rule.Action.Map">
+        <xs:sequence>
+            <xs:element name="Entry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="source" type="xs:string" use="required"></xs:attribute>
+                    <xs:attribute name="target" type="xs:string" use="required"></xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="source" use="required" type="xs:string"></xs:attribute>
+    </xs:complexType>   
+
+    <xs:simpleType name="simpleType.Rule.Action.type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SET_TEXT"></xs:enumeration>
+            <xs:enumeration value="SET_NUMBER"></xs:enumeration>
+            <xs:enumeration value="SET_OPTION"></xs:enumeration>
+            <xs:enumeration value="SET_OPTIONS"></xs:enumeration>
+            <xs:enumeration value="SET_CATEGORY"></xs:enumeration>
+            <xs:enumeration value="SET_IMAGE"></xs:enumeration>
+            <xs:enumeration value="SET_ATTACHMENT"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.lang">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ara"></xs:enumeration>
+            <xs:enumeration value="zho"></xs:enumeration>
+            <xs:enumeration value="eng"></xs:enumeration>
+            <xs:enumeration value="fra"></xs:enumeration>
+            <xs:enumeration value="deu"></xs:enumeration>
+            <xs:enumeration value="hin"></xs:enumeration>
+            <xs:enumeration value="ita"></xs:enumeration>
+            <xs:enumeration value="jpn"></xs:enumeration>
+            <xs:enumeration value="kor"></xs:enumeration>
+            <xs:enumeration value="nld"></xs:enumeration>
+            <xs:enumeration value="por"></xs:enumeration>
+            <xs:enumeration value="rus"></xs:enumeration>
+            <xs:enumeration value="spa"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="simpleType.fileExtension">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="jpg"></xs:enumeration>
+            <xs:enumeration value="png"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.positiveInteger.max100">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:maxInclusive value="100"></xs:maxInclusive>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

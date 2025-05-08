@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!-- Définition Table -->
+	<xs:element name="Table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Items" type="complexType.Table.Items" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="key" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Définition Items -->
+	<xs:complexType name="complexType.Table.Items">
+		<xs:sequence>
+			<xs:element name="Item" type="complexType.Table.Items.Item" minOccurs="0" maxOccurs="unbounded">
+				<!-- Unicité Identifiers-->
+				<xs:key name="identifierKey">
+					<xs:selector xpath="Identifier" />
+					<xs:field xpath="@key" />
+				</xs:key>
+				<xs:key name="classificationKey">
+					<xs:selector xpath="Classification" />
+					<xs:field xpath="@key" />
+				</xs:key>
+				<xs:key name="conditionalFormattingKey">
+					<xs:selector xpath="Conditional-Formatting" />
+					<xs:field xpath="@key" />
+				</xs:key>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Définition Item -->
+	<xs:complexType name="complexType.Table.Items.Item">
+		<!-- Minimum un identifiant -->
+		<xs:sequence>
+			<xs:element name="Identifier" type="complexType.Table.Items.Item.Standard" minOccurs="1" maxOccurs="5" />
+			<xs:element name="Classification" type="complexType.Table.Items.Item.Standard" minOccurs="0" maxOccurs="5" />
+			<xs:element name="Conditional-Formatting" type="complexType.Table.Items.Item.Standard" minOccurs="0" maxOccurs="5" />
+			<xs:element name="Field" type="complexType.Table.Items.Item.Field" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="Item" type="complexType.Table.Items.Item" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="partition" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<!-- Défintion de tout sauf des fields -->
+	<xs:complexType name="complexType.Table.Items.Item.Standard">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="key" type="xs:string" use="required" />
+				<xs:attribute name="suggestion" type="xs:boolean" />
+				<xs:attribute name="delete" type="xs:boolean" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Table.Items.Item.Field">
+		<xs:complexContent>
+			<xs:extension base="complexType.Table.Items.Item.Standard">
+				<xs:attribute name="suffix" type="simpleType.Generic.NonEmptyString.255" />
+				<xs:attribute name="quantity" type="xs:float" />
+				<xs:attribute name="comment" type="xs:string" />
+				<xs:attribute name="file-key" type="xs:string" />
+				<xs:attribute name="file-hash" type="xs:string" />
+				<xs:attribute name="force-update" type="xs:boolean" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="simpleType.Generic.NonEmptyString.255">
+		<xs:restriction base="simpleType.Generic.String">
+			<xs:minLength value="1" />
+			<xs:maxLength value="255" />
+			<xs:pattern value="\S|(\S(.*)\S)" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="simpleType.Generic.String">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+</xs:schema>

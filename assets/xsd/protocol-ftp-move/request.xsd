@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xml       = "http://www.w3.org/XML/1998/namespace"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault   = "qualified"
+    attributeFormDefault = "unqualified">
+	
+	<xs:element name="Ftp-Move">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="File" type="file" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="file">
+        <xs:sequence>
+            <xs:element name="Source-Path" type="path" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Target-Path" type="path" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+    <xs:simpleType name="path">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="240"/>
+        </xs:restriction>
+	</xs:simpleType>
+	
+	
+</xs:schema>

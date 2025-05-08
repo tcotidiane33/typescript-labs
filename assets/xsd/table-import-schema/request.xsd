@@ -1,0 +1,1161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <!-- Table -->
+    <xs:element name="Table">
+        <xs:complexType mixed="false">
+            <xs:all>
+                <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+                <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="Color" type="simpleType.Generic.Color" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Position" type="simpleType.Generic.Position" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Schema" type="complexType.Table.Schema" minOccurs="1" maxOccurs="1" />
+            </xs:all>
+            <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Table/Schema -->
+    <xs:complexType name="complexType.Table.Schema" mixed="false">
+        <xs:all>
+            <xs:element name="Levels" type="complexType.Table.Schema.Levels" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Partitions" type="complexType.Table.Schema.Partitions" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Identifiers" type="complexType.Table.Schema.Identifiers" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Classifications" type="complexType.Table.Schema.Classifications" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Fields" type="complexType.Table.Schema.Fields" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Formulas" type="complexType.Table.Schema.Formulas" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Matrix" type="complexType.Table.Schema.Matrix" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Conditional-Formattings" type="complexType.Table.Schema.Conditional-Formattings" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Sections" type="complexType.Table.Schema.Sections" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Screens" type="complexType.Table.Schema.Screens" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+    <!-- Table/Schema/Levels -->
+    <xs:complexType name="complexType.Table.Schema.Levels" mixed="false">
+        <xs:sequence>
+            <xs:element name="Level" type="complexType.Table.Schema.Levels.Level" minOccurs="1" maxOccurs="5" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Levels/Level -->
+    <xs:complexType name="complexType.Table.Schema.Levels.Level" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="index" type="simpleType.Generic.Index" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Partitions -->
+    <xs:complexType name="complexType.Table.Schema.Partitions" mixed="false">
+        <xs:sequence>
+            <xs:element name="Partition" type="complexType.Table.Schema.Partitions.Partition" minOccurs="1" maxOccurs="5" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Partitions/Partition -->
+    <xs:complexType name="complexType.Table.Schema.Partitions.Partition" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Position" type="simpleType.Generic.Position" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Identifiers -->
+    <xs:complexType name="complexType.Table.Schema.Identifiers" mixed="false">
+        <xs:sequence>
+            <xs:element name="Identifier" type="complexType.Table.Schema.Identifiers.Identifier" minOccurs="1" maxOccurs="5" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Identifiers/Identifier -->
+    <xs:complexType name="complexType.Table.Schema.Identifiers.Identifier" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="index" type="simpleType.Generic.Index" use="required" />
+        <xs:attribute name="level" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Classifications -->
+    <xs:complexType name="complexType.Table.Schema.Classifications" mixed="false">
+        <xs:sequence>
+            <xs:element name="Classification" type="complexType.Table.Schema.Classifications.Classification" minOccurs="1" maxOccurs="5" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Classifications/Classification -->
+    <xs:complexType name="complexType.Table.Schema.Classifications.Classification" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Categories" type="complexType.Table.Schema.Classifications.Classification.Categories" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Classifications/Classification/Categories -->
+    <xs:complexType name="complexType.Table.Schema.Classifications.Classification.Categories" mixed="false">
+        <xs:sequence>
+            <xs:element name="Category" type="complexType.Table.Schema.Classifications.Classification.Categories.Category" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Classifications/Classification/Categories/Category -->
+    <xs:complexType name="complexType.Table.Schema.Classifications.Classification.Categories.Category" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="parent" type="simpleType.Generic.NonEmptyString.255" use="optional" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields -->
+    <xs:complexType name="complexType.Table.Schema.Fields" mixed="false">
+        <xs:sequence>
+            <xs:element name="Field" type="complexType.Table.Schema.Fields.Field" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields/Field -->
+    <xs:complexType name="complexType.Table.Schema.Fields.Field" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Prefix" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Suffix" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Suffixes" type="complexType.Table.Schema.Fields.Field.Suffixes" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Precision" type="simpleType.Generic.Precision" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Options" type="complexType.Table.Schema.Fields.Field.Options" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="type" type="simpleType.Generic.Type" use="required" />
+        <xs:attribute name="level" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields/Field/Options -->
+    <xs:complexType name="complexType.Table.Schema.Fields.Field.Options" mixed="false">
+        <xs:sequence>
+            <xs:element name="Option" type="complexType.Table.Schema.Fields.Field.Options.Option" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields/Field/Options/Option -->
+    <xs:complexType name="complexType.Table.Schema.Fields.Field.Options.Option" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyStringWithTrimSpace.255" use="required" />
+        <xs:attribute name="color" type="simpleType.Generic.Color" use="optional" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields/Field/Suffixes -->
+    <xs:complexType name="complexType.Table.Schema.Fields.Field.Suffixes" mixed="false">
+        <xs:sequence>
+            <xs:element name="Suffix" type="complexType.Table.Schema.Fields.Field.Suffixes.Suffix" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Fields/Field/Suffixes/Suffix -->
+    <xs:complexType name="complexType.Table.Schema.Fields.Field.Suffixes.Suffix" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyStringWithTrimSpace.255" use="required" />
+        <xs:attribute name="default" type="simpleType.Generic.Default" use="optional" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas -->
+    <xs:complexType name="complexType.Table.Schema.Formulas" mixed="false">
+        <xs:all>
+            <xs:element name="Identifier" type="complexType.Table.Schema.Formulas.Identifier" minOccurs="0" maxOccurs="5" />
+            <xs:element name="Field" type="complexType.Table.Schema.Formulas.Field" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Classification" type="complexType.Table.Schema.Formulas.Classification" minOccurs="0" maxOccurs="5" />
+        </xs:all>
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Identifier -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Identifier" mixed="false">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Table.Schema.Formulas.Formula.Rule" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyStringWithTrimSpace.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Field -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Field" mixed="false">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Table.Schema.Formulas.Formula.Rule" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyStringWithTrimSpace.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Classification /!\-->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Classification" mixed="false">
+        <xs:sequence>
+            <xs:element name="Rule" type="complexType.Table.Schema.Formulas.Formula.Rule" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyStringWithTrimSpace.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule">
+        <xs:all>
+            <xs:element name="Conditions" type="complexType.Table.Schema.Formulas.Formula.Rule.Conditions" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Action" type="complexType.Table.Schema.Formulas.Formula.Rule.Action" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="priority" type="xs:positiveInteger" use="required" />
+    </xs:complexType>
+
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Conditions -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Conditions">
+        <xs:sequence>
+            <xs:element name="Condition-Group" type="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Conditions/Condition-Group -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group">
+        <xs:sequence>
+            <xs:element name="Condition" type="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group.Condition" minOccurs="1" maxOccurs="5" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Conditions/Condition-Group/Condition -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group.Condition">
+        <xs:all>
+            <xs:element name="Value" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Field" type="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group.Condition.Field" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="source" type="xs:string" use="required" />
+        <xs:attribute name="operator" type="simpleType.Generic.Operator" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Conditions/Condition-Group/Condition/Field -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Conditions.Condition-Group.Condition.Field">
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Action -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Action">
+        <xs:all>
+            <xs:element name="Copy" type="complexType.Table.Schema.Formulas.Formula.Rule.Action.Copy" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Value" type="complexType.Table.Schema.Formulas.Formula.Rule.Action.Value" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Template" type="complexType.Table.Schema.Formulas.Formula.Rule.Action.Template" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Map" type="complexType.Table.Schema.Formulas.Formula.Rule.Action.Map" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="type" type="simpleType.Rule.Action.type" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Action/Copy -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Action.Copy">
+        <xs:attribute name="source" type="xs:string" use="required" />
+        <xs:attribute name="use" type="xs:string" use="optional" />
+        <xs:attribute name="lang" type="xs:string" use="optional" />
+        <xs:attribute name="remove-carriage-returns" type="xs:boolean" use="optional" />
+        <xs:attribute name="trim-spaces" type="xs:boolean" use="optional" />
+        <xs:attribute name="remove-html" type="xs:boolean" use="optional" />
+        <xs:attribute name="precision" type="simpleType.Rule.Action.Template.Precision" use="optional" />
+        <xs:attribute name="round" type="simpleType.Rule.Action.Template.Round" use="optional" />
+        <xs:attribute name="width-px" type="xs:positiveInteger" use="optional" />
+        <xs:attribute name="height-px" type="xs:positiveInteger" use="optional" />
+        <xs:attribute name="quality" type="simpleType.Rule.Action.Template.Quality" use="optional" />
+        <xs:attribute name="extension" type="simpleType.Rule.Action.Template.Extension" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Action/Value -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Action.Value">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="quantity" type="xs:integer" use="optional" />
+                <xs:attribute name="comment" type="xs:string" use="optional" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Action/Template -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Action.Template">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="remove-carriage-returns" type="xs:boolean" use="optional" />
+                <xs:attribute name="trim-spaces" type="xs:boolean" use="optional" />
+                <xs:attribute name="remove-html" type="xs:boolean" use="optional" />
+                <xs:attribute name="precision" type="simpleType.Rule.Action.Template.Precision" use="optional" />
+                <xs:attribute name="round" type="simpleType.Rule.Action.Template.Round" use="optional" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Table/Schema/Formulas/Formula/Rule/Action/Map -->
+    <xs:complexType name="complexType.Table.Schema.Formulas.Formula.Rule.Action.Map">
+        <xs:sequence>
+            <xs:element name="Entry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="source" type="xs:string" use="required" />
+                    <xs:attribute name="target" type="xs:string" use="required" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="source" type="xs:string" use="required" />
+        <xs:attribute name="target" type="xs:string" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Matrix -->
+    <xs:complexType name="complexType.Table.Schema.Matrix" mixed="false">
+        <xs:sequence>
+            <xs:element name="Common" type="complexType.Table.Schema.Matrix.Common" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Specific" type="complexType.Table.Schema.Matrix.Specific" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Matrix/Common -->
+    <xs:complexType name="complexType.Table.Schema.Matrix.Common" mixed="false">
+        <xs:sequence>
+            <xs:element name="Field" type="complexType.Table.Schema.Matrix.Common.Field" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Matrix/Common/Field -->
+    <xs:complexType name="complexType.Table.Schema.Matrix.Common.Field" mixed="false">
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Matrix/Specific -->
+    <xs:complexType name="complexType.Table.Schema.Matrix.Specific" mixed="false">
+        <xs:sequence>
+            <xs:element name="Field" type="complexType.Table.Schema.Matrix.Specific.Field" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="classification" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="category" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Matrix/Specific/Field -->
+    <xs:complexType name="complexType.Table.Schema.Matrix.Specific.Field" mixed="false">
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings" mixed="false">
+        <xs:sequence>
+            <xs:element name="Conditional-Formatting" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting" minOccurs="0" maxOccurs="6" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Default-Status" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Default-Status" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Statuses" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="level" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Default-Status -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Default-Status" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Color" type="simpleType.Generic.Color" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Statuses -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses" mixed="false">
+        <xs:sequence>
+            <xs:element name="Status" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Statuses/Status -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Color" type="simpleType.Generic.Color" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Priority" type="simpleType.Generic.Priority" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Rules" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+        <!-- Ajouter le status pour le ticket #2939-->
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Statuses/Status/Rules -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules" mixed="false">
+        <xs:all>
+            <xs:element name="Common" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules.Common" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Specific" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules.Specific" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Statuses/Status/Rules/Common /!\ -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules.Common" mixed="false">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Identifier" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Identifier" />
+            <xs:element name="Classification" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Classification" />
+            <xs:element name="Field" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Field" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Statuses/Status/Rules/Specific -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Statuses.Status.Rules.Specific" mixed="false">
+        <xs:sequence>
+            <xs:element name="Field" type="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Field" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="classification" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="category" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Identifier -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Identifier" mixed="false">
+        <xs:all>
+            <xs:element name="Rule-Required" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Min-Length" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="min" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Length" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Regex" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="regex" type="simpleType.Generic.NonEmptyString.500" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Barcode" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="type" type="simpleType.Generic.Barcode" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Classification -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Classification">
+        <xs:all>
+            <xs:element name="Rule-Required" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Is-Leaf" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Only-Active-Categories" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Conditional-Formattings/Conditional-Formatting/Field -->
+    <xs:complexType name="complexType.Table.Schema.Conditional-Formattings.Conditional-Formatting.Field">
+        <xs:all>
+            <xs:element name="Rule-Only-Active-Options" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Selectable" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Not-Be-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Condition" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="Conditions" type="complexType.Table.Schema.Formulas.Formula.Rule.Conditions" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+                    </xs:all>
+                    <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Min-Length" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="min" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Length" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Regex" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="regex" type="simpleType.Generic.NonEmptyString.500" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Less-Than" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Greater-Than" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Less-Than-Or-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Greater-Than-Or-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Decimal-Places" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="precision" type="simpleType.Generic.Precision" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Not-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Min-Width-Px" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="min" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Width-Px" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Min-Height-Px" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="min" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Height-Px" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Size-Kb" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Extension" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="extension" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Color-Space" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="name" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Color-Profile" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="name" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Min-Values" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="min" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Max-Values" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="max" type="simpleType.Generic.StrictlyPositiveNumber" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Greater-Than-Another-Field" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Greater-Than-Or-Equal-Another-Field" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Less-Than-Another-Field" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Must-Be-Less-Than-Or-Equal-Another-Field" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Not-Empty" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Has-Options" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Option" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Greater-Than" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Greater-Than-Or-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Less-Than" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Less-Than-Or-Equal" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rule-Required-If-Another-Field-Is-Equal-To" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="field" type="simpleType.Generic.NonEmptyString.255" use="required" />
+                    <xs:attribute name="value" type="simpleType.Generic.Float" use="required" />
+                    <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Sections -->
+    <xs:complexType name="complexType.Table.Schema.Sections" mixed="false">
+        <xs:sequence>
+            <xs:element name="Section" type="complexType.Table.Schema.Sections.Section" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Sections/Section -->
+    <xs:complexType name="complexType.Table.Schema.Sections.Section" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens -->
+    <xs:complexType name="complexType.Table.Schema.Screens" mixed="false">
+        <xs:sequence>
+            <xs:element name="Screen" type="complexType.Table.Schema.Screens.Screen" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen" mixed="false">
+        <xs:all>
+            <xs:element name="Title" type="simpleType.Generic.NonEmptyString.255" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Title-Local" type="complexType.Generic.TitleLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Description" type="simpleType.Generic.NonEmptyString.255" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Description-Local" type="complexType.Generic.DescriptionLocal" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Position" type="simpleType.Generic.Position" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Grid" type="complexType.Table.Schema.Screens.Screen.Grid" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="level" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="status" type="simpleType.Generic.Status" use="optional" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen/Grid -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen.Grid" mixed="false">
+        <xs:all>
+            <xs:element name="Line-Height" type="simpleType.Generic.LineHeight" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Common" type="complexType.Table.Schema.Screens.Screen.Grid.Common" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Specific" type="complexType.Table.Schema.Screens.Screen.Grid.Specific" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen/Grid/Common -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen.Grid.Common" mixed="false">
+        <xs:sequence>
+            <xs:element name="Section" type="complexType.Table.Schema.Screens.Screen.Grid.Common.Section" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen/Grid/Common/Section -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen.Grid.Common.Section" mixed="false">
+        <xs:all>
+            <xs:element name="Column-Identifier" type="complexType.Generic.Common.Column" minOccurs="0" maxOccurs="5" />
+            <xs:element name="Column-Conditional-Formatting" type="complexType.Generic.Common.Column" minOccurs="0" maxOccurs="5" />
+            <xs:element name="Column-Classification" type="complexType.Generic.Common.Column" minOccurs="0" maxOccurs="5" />
+            <xs:element name="Column-Field" type="complexType.Generic.Common.Column" minOccurs="0" maxOccurs="unbounded" />
+        </xs:all>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="position" type="simpleType.Generic.Position" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen/Grid/Specific -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen.Grid.Specific" mixed="false">
+        <xs:sequence>
+            <xs:element name="Section" type="complexType.Table.Schema.Screens.Screen.Grid.Specific.Section" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="classification" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="category" type="simpleType.Generic.NonEmptyString.255" use="required" />
+    </xs:complexType>
+
+    <!-- Table/Schema/Screens/Screen/Grid/Specific/Section -->
+    <xs:complexType name="complexType.Table.Schema.Screens.Screen.Grid.Specific.Section" mixed="false">
+        <xs:sequence>
+            <xs:element name="Column-Field" type="complexType.Generic.Specific.Column" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="position" type="simpleType.Generic.Position" use="required" />
+        <xs:attribute name="width" type="simpleType.Generic.Width" use="optional" />
+    </xs:complexType>
+
+    <!-- complex types generic -->
+
+    <!-- TitleLocal -->
+    <xs:complexType name="complexType.Generic.TitleLocal" mixed="false">
+        <xs:simpleContent>
+            <xs:extension base="simpleType.Generic.NonEmptyString">
+                <xs:attribute name="lang" type="simpleType.Generic.Lang" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- DescriptionLocal -->
+    <xs:complexType name="complexType.Generic.DescriptionLocal" mixed="false">
+        <xs:simpleContent>
+            <xs:extension base="simpleType.Generic.NonEmptyString">
+                <xs:attribute name="lang" type="simpleType.Generic.Lang" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Metadata -->
+    <xs:complexType name="complexType.Generic.Metadata" mixed="false">
+        <xs:simpleContent>
+            <xs:extension base="simpleType.Generic.NonEmptyString.255">
+                <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Column -->
+    <xs:complexType name="complexType.Generic.Common.Column" mixed="false">
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="position" type="simpleType.Generic.Position" use="required" />
+        <xs:attribute name="width" type="simpleType.Generic.Width" use="optional" />
+        <xs:attribute name="read-only" type="simpleType.Generic.ReadOnly" use="optional" />
+        <xs:attribute name="fixed" type="simpleType.Generic.Fixed" use="optional" />
+    </xs:complexType>
+
+    <!-- Column -->
+    <xs:complexType name="complexType.Generic.Specific.Column" mixed="false">
+        <xs:attribute name="key" type="simpleType.Generic.NonEmptyString.255" use="required" />
+        <xs:attribute name="position" type="simpleType.Generic.Position" use="required" />
+        <xs:attribute name="width" type="simpleType.Generic.Width" use="optional" />
+        <xs:attribute name="read-only" type="simpleType.Generic.ReadOnly" use="optional" />
+        <xs:attribute name="fixed" type="simpleType.Generic.Fixed" use="optional" />
+    </xs:complexType>
+
+    <!-- simple types ACTION -->
+    <xs:simpleType name="simpleType.Rule.Action.Template.Precision">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="10" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Round">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="UP" />
+            <xs:enumeration value="DOWN" />
+            <xs:enumeration value="CEILING" />
+            <xs:enumeration value="FLOOR" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Quality">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="100" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.Template.Extension">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="jpg" />
+            <xs:enumeration value="png" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Rule.Action.type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SET_TEXT" />
+            <xs:enumeration value="SET_NUMBER" />
+            <xs:enumeration value="REMOVE_VALUE" />
+            <xs:enumeration value="SET_SELECTABLE_OPTIONS" />
+            <xs:enumeration value="SET_OPTION" />
+            <xs:enumeration value="SET_OPTIONS" />
+            <xs:enumeration value="SET_CATEGORY" />
+            <xs:enumeration value="SET_IMAGE" />
+            <xs:enumeration value="SET_ATTACHMENT" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- simple Generic types -->
+
+    <xs:simpleType name="simpleType.Generic.Operator">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EMPTY" />
+            <xs:enumeration value="NOT_EMPTY" />
+            <xs:enumeration value="CONTAINS" />
+            <xs:enumeration value="EQUALS" />
+            <xs:enumeration value="NOT_EQUALS" />
+            <xs:enumeration value="STARTS_WITH" />
+            <xs:enumeration value="ENDS_WITH" />
+            <xs:enumeration value="LESS_THAN" />
+            <xs:enumeration value="LESS_THAN_OR_EQUAL" />
+            <xs:enumeration value="GREATER_THAN" />
+            <xs:enumeration value="GREATER_THAN_OR_EQUAL" />
+            <xs:enumeration value="IN" />
+            <xs:enumeration value="NOT_IN" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.String">
+        <xs:restriction base="xs:string" />
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.NonEmptyString">
+        <xs:restriction base="simpleType.Generic.String">
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.NonEmptyString.255">
+        <xs:restriction base="simpleType.Generic.String">
+            <xs:minLength value="1" />
+            <xs:maxLength value="255" />
+            <xs:pattern value="\S|(\S(.*)\S)" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.NonEmptyStringWithTrimSpace.255">
+        <xs:restriction base="simpleType.Generic.String">
+            <xs:minLength value="1" />
+            <xs:maxLength value="255" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.NonEmptyString.500">
+        <xs:restriction base="simpleType.Generic.String">
+            <xs:minLength value="1" />
+            <xs:maxLength value="500" />
+            <xs:pattern value="\S|(\S(.*)\S)" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.NonEmptyString.25">
+        <xs:restriction base="simpleType.Generic.String">
+            <xs:minLength value="1" />
+            <xs:maxLength value="25" />
+            <xs:pattern value="\S|(\S(.*)\S)" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Lang">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ara" />
+            <xs:enumeration value="zho" />
+            <xs:enumeration value="eng" />
+            <xs:enumeration value="fra" />
+            <xs:enumeration value="deu" />
+            <xs:enumeration value="hin" />
+            <xs:enumeration value="ita" />
+            <xs:enumeration value="jpn" />
+            <xs:enumeration value="kor" />
+            <xs:enumeration value="nld" />
+            <xs:enumeration value="por" />
+            <xs:enumeration value="rus" />
+            <xs:enumeration value="spa" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ARCHIVED" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Precision">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="0" />
+            <xs:enumeration value="1" />
+            <xs:enumeration value="2" />
+            <xs:enumeration value="3" />
+            <xs:enumeration value="4" />
+            <xs:enumeration value="5" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Color">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NONE" />
+            <xs:enumeration value="RED" />
+            <xs:enumeration value="GREEN" />
+            <xs:enumeration value="BLUE" />
+            <xs:enumeration value="ORANGE" />
+            <xs:enumeration value="YELLOW" />
+            <xs:enumeration value="PURPLE" />
+            <xs:enumeration value="BLACK" />
+            <xs:enumeration value="BROWN" />
+            <xs:enumeration value="CYAN" />
+            <xs:enumeration value="MAGENTA" />
+            <xs:enumeration value="PINK" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Number">
+        <xs:restriction base="xs:integer" />
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Float">
+        <xs:restriction base="xs:float" />
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Decimal5">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="5" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.StrictlyPositiveNumber">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1" />
+            <xs:maxInclusive value="2000000000" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.PositiveNumber">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="2000000000" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Position">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Index">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1" />
+            <xs:maxInclusive value="5" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Priority">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SINGLE-LINE-TEXT" />
+            <xs:enumeration value="LONG-TEXT" />
+            <xs:enumeration value="HTML-TEXT" />
+            <xs:enumeration value="NUMBER" />
+            <xs:enumeration value="SINGLE-SELECT" />
+            <xs:enumeration value="MULTIPLE-SELECT" />
+            <xs:enumeration value="MULTIPLE-SELECT-QUANTIFIED" />
+            <xs:enumeration value="MULTIPLE-SELECT-QUANTIFIED-WITH-COMMENTS" />
+            <xs:enumeration value="DATE" />
+            <xs:enumeration value="DATE-TIME" />
+            <xs:enumeration value="IMAGE" />
+            <xs:enumeration value="ATTACHMENT" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.LineHeight">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SHORT" />
+            <xs:enumeration value="MEDIUM" />
+            <xs:enumeration value="TALL" />
+            <xs:enumeration value="EXTRA_TALL" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Width">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SMALL" />
+            <xs:enumeration value="MEDIUM" />
+            <xs:enumeration value="LARGE" />
+            <xs:enumeration value="EXTRA_LARGE" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.ReadOnly">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true" />
+            <xs:enumeration value="false" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Fixed">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true" />
+            <xs:enumeration value="false" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Default">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true" />
+            <xs:enumeration value="false" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="simpleType.Generic.Barcode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EAN13" />
+            <xs:enumeration value="EAN128" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

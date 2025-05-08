@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xml       = "http://www.w3.org/XML/1998/namespace"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault   = "qualified"
+    attributeFormDefault = "unqualified">
+	
+	<xs:element name="Rest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Rest-Call" type="complexType.Generic.restCall" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+    <!-- COMPLEX TYPES -->
+
+	<xs:complexType name="complexType.Generic.restCall">
+        <xs:all>
+            <xs:element name="Request" type="complexType.Generic.Request" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Metadata" type="complexType.Generic.Metadata" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+	</xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request">
+        <xs:all>
+            <xs:element name="Headers" type="complexType.Generic.Request.Headers" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Parameters" type="complexType.Generic.Request.Parameters" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+        <xs:attribute name="method" type="simpleType.Generic.method" use="required"/>
+        <xs:attribute name="path" type="simpleType.Generic.path" use="required"/>
+    </xs:complexType>
+	
+    <xs:complexType name="complexType.Generic.Request.Headers">
+        <xs:sequence>
+            <xs:element name="Header" type="complexType.Generic.Request.Headers.Header" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request.Parameters">
+        <xs:all>
+            <xs:element name="Query" type="complexType.Generic.Request.Parameters.Query" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Raw-Body" type="complexType.Generic.Request.Parameters.Raw-Body" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Form-Data" type="complexType.Generic.Request.Parameters.Form-Data" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request.Parameters.Query">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request.Parameters.Raw-Body">
+        <xs:simpleContent>
+            <xs:extension base="xs:string"/>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request.Parameters.Form-Data">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" use="required"/>
+                <xs:attribute name="type" type="simpleType.Generic.Request.Parameters.Form-Data.type" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Metadata">
+        <xs:sequence>
+            <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexType.Generic.Request.Headers.Header">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="key" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- SIMPLE TYPES -->
+
+    <xs:simpleType name="simpleType.Generic.Request.Parameters.Form-Data.type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TEXT"/>
+            <xs:enumeration value="FILE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="simpleType.Generic.method">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GET"/>
+            <xs:enumeration value="POST"/>
+            <xs:enumeration value="PUT"/>
+            <xs:enumeration value="DELETE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="simpleType.Generic.path">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

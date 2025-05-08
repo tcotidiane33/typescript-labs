@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xml       = "http://www.w3.org/XML/1998/namespace"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault   = "qualified"
+    attributeFormDefault = "unqualified">
+	
+    <!-- VENETIAN BLIND PATTERN -->
+
+	<xs:element name="Generate-Excel">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="File" type="file" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="unique_file_name">
+			<xs:selector xpath="File"/>
+			<xs:field xpath="File-Name"/>
+		</xs:unique>
+	</xs:element>
+	
+	<!-- FILE definition -->
+	<xs:complexType name="file">
+		<xs:sequence>
+			<xs:element name="File-Name" type="complexType.Generic.fileName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Template-Key" type="complexType.Generic.nonEmptyString" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Sheets" type="sheets" minOccurs="1" maxOccurs="1">
+				<xs:unique name="unique_sheet_name">
+					<xs:selector xpath="Sheet"/>
+					<xs:field xpath="Sheet-Name"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- SHEETS definition -->
+	<xs:complexType name="sheets">
+		<xs:sequence>
+			<xs:element name="Sheet" type="sheet" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- SHEET definition -->
+	<xs:complexType name="sheet">
+		<xs:sequence>
+			<xs:element name="Sheet-Name" type="complexType.Generic.sheetName" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Cells" type="cells"  minOccurs="1" maxOccurs="1">
+				<!-- A cell is unique in each sheet -->
+				<xs:unique name="unique_cell">
+					<xs:selector xpath="Cell"/>
+					<xs:field xpath="@line"/>
+					<xs:field xpath="@column"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- CELLS definition -->
+	<xs:complexType name="cells">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Cell-Text" type="complexType.Generic.cellText"/>
+            <xs:element name="Cell-Number" type="complexType.Generic.cellNumber"/>
+            <xs:element name="Cell-Image" type="complexType.Generic.cellImage"/>
+            <xs:element name="Cell-Link" type="complexType.Generic.cellLink"/>
+        </xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Generic.cellText">
+		<xs:simpleContent>
+			<xs:extension base="complexType.Generic.standardCell"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Generic.cellNumber">
+		<xs:simpleContent>
+			<xs:extension base="complexType.Generic.standardCell"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Generic.cellImage">
+		<xs:simpleContent>
+			<xs:extension base="complexType.Generic.standardCell"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Generic.cellLink">
+		<xs:simpleContent>
+			<xs:extension base="complexType.Generic.standardCell">
+				<xs:attribute name="type" type="complexType.Generic.link" use="required"/>
+				<xs:attribute name="url" type="complexType.Generic.nonEmptyString" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="complexType.Generic.standardCell">
+		<xs:simpleContent>
+			<xs:extension base="complexType.Generic.nonEmptyString">
+				<xs:attribute name="line" type="xs:positiveInteger" use="required"/>
+				<xs:attribute name="column" type="xs:positiveInteger" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="complexType.Generic.link">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="URL"/>
+            <xs:enumeration value="FILE"/>
+            <xs:enumeration value="EMAIL"/>
+            <xs:enumeration value="DOCUMENT"/>
+        </xs:restriction>
+	</xs:simpleType>
+
+	<!-- Basic types -->
+
+	<xs:simpleType name="complexType.Generic.nonEmptyString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="240"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="complexType.Generic.fileName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^/\\\[\]*?:\t\n]+\.(xlsx|xlsm)"/>
+			<xs:maxLength value="75"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="complexType.Generic.sheetName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^/\\\[\]*?:\t\n]{1,31}"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="31"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+
+	
+</xs:schema>
