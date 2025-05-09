@@ -1,4 +1,4 @@
-namespace MyApp {
+/* namespace MyApp {
   const userName: string = "JohnDoe";
   const userAge: number = 30;
   const isEnabled: boolean = false;
@@ -72,10 +72,10 @@ namespace MyApp {
 
   const user2 = new Employer("Jane", 28, false, "Tech Corp");
   console.log(user2.getInfos());
-}
-
-/* namespace MyApp2 {
-  let depart:null | boolean = null;
-
-  depart = false;
 } */
+
+namespace MyApp2 {
+  let depart: "IT" | "HR" | boo= "IT";
+
+  depart = ""
+}

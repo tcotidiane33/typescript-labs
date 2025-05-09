@@ -61,21 +61,10 @@ namespace MyApp {
       super(name, age, isEnabled);
       this.companyName = companyName;
     }
-
-    public getInfos(): string{
-      return super.getInfos() + " " + this.companyName; 
-    }
   }
 
   const user1 = new User("John", 30, true);
   console.log(user1.getName());
 
-  const user2 = new Employer("Jane", 28, false, "Tech Corp");
-  console.log(user2.getInfos());
+  const user2 = new E
 }
-
-/* namespace MyApp2 {
-  let depart:null | boolean = null;
-
-  depart = false;
-} */

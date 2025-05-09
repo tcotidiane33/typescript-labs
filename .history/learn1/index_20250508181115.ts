@@ -63,7 +63,7 @@ namespace MyApp {
     }
 
     public getInfos(): string{
-      return super.getInfos() + " " + this.companyName; 
+      return super.
     }
   }
 
@@ -73,9 +73,3 @@ namespace MyApp {
   const user2 = new Employer("Jane", 28, false, "Tech Corp");
   console.log(user2.getInfos());
 }
-
-/* namespace MyApp2 {
-  let depart:null | boolean = null;
-
-  depart = false;
-} */

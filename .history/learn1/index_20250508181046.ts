@@ -62,9 +62,7 @@ namespace MyApp {
       this.companyName = companyName;
     }
 
-    public getInfos(): string{
-      return super.getInfos() + " " + this.companyName; 
-    }
+    public 
   }
 
   const user1 = new User("John", 30, true);
@@ -73,9 +71,3 @@ namespace MyApp {
   const user2 = new Employer("Jane", 28, false, "Tech Corp");
   console.log(user2.getInfos());
 }
-
-/* namespace MyApp2 {
-  let depart:null | boolean = null;
-
-  depart = false;
-} */

@@ -74,8 +74,6 @@ namespace MyApp {
   console.log(user2.getInfos());
 }
 
-/* namespace MyApp2 {
-  let depart:null | boolean = null;
+namespace MyApp2 {
 
-  depart = false;
-} */
+}
